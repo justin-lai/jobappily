@@ -50,16 +50,24 @@ app.get('/gitjobs', function(req, res) {
           if(err){
             return console.log('Error: ', err);
           }
-          console.log('__HOW__TO__APPLY__', result.how_to_apply);
-          positions.push({
-            company: result.company,
-            jobTitle: result.title,
-            location: result.location,
-            description: result.description,
-            // this line crashes when the section contains no url
-            howToApply: result.how_to_apply.match(/href="([^\'\"]+)/g)[0].slice(6)
-            // companyLogo: result.company_logo
-          });
+
+          if (!result.how_to_apply.match(/href="([^\'\"]+)/g)) {
+            positions.push({
+              company: result.company,
+              jobTitle: result.title,
+              location: result.location,
+              description: result.description
+            });
+          } else {
+            positions.push({
+              company: result.company,
+              jobTitle: result.title,
+              location: result.location,
+              description: result.description,
+              howToApply: result.how_to_apply.match(/href="([^\'\"]+)/g)[0].slice(6)
+            });
+          }
+
           if (results.length === positions.length) {
             res.send(positions);
           }

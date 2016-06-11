@@ -138,7 +138,15 @@ input#search-bar{
   float: right;
 }
 
+.top-btn.first {
+  margin-left: 1em;
+}
 
-
-
-
+.top-btn {
+  border: 1px solid #7A5D81;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  margin-left: 10px;
+  width: 125px;
+}

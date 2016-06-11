@@ -360,7 +360,7 @@ class JobView extends React.Component {
         <div className="container event-list timeline col-xs-12">
           { (() => {
               if (this.events) {
-                this.events.map( (event, idx) => {
+                return this.events.map( (event, idx) => {
                 event.questions === null ? this.noQuestions = true : this.noQuestions = false;
                 event.note === null ? this.noNotes = true : this.noNotes = false;
                 this.eventHolder[event.id] = event;

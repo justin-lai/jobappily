@@ -47,6 +47,10 @@ tr {
   margin-bottom: 10px;  
 }
 
+.li-job:hover {
+  background-color: #e7e7e7;
+}
+
 li button {
   float: right;
 }
@@ -71,9 +75,12 @@ button.inline {
 
 .view-job {
   background-color: white;
-  border: 1px solid #337ab7;
+  border: 1px solid #7A5D81;
   margin-left: 7px;
   border-radius: 4px;
+  height: 31px;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 
 h2.job-depot {

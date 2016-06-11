@@ -113,8 +113,8 @@ export default class JobList extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      activeJobs: this.props.activeJobs,
-      toDoJobs: this.props.toDoJobs
+      activeJobs: nextProps.activeJobs,
+      toDoJobs: nextProps.toDoJobs
     })
   }
 
@@ -137,8 +137,8 @@ export default class JobList extends React.Component {
       //if moving activeJob to toDoJob
       } else {
         let jobToMove = newActiveJobs[oldIndex];
-        // jobToMove.apply = false;
-        // this.methods.putJob(jobToMove);
+        jobToMove.apply = false;
+        this.methods.putJob(jobToMove);
         newToDoJobs.splice(newIndex - adjustment, 0, jobToMove)
         newActiveJobs.splice(oldIndex, 1);
       }
@@ -151,8 +151,8 @@ export default class JobList extends React.Component {
       //if moving toDoJob to activeJob
       } else {
         let jobToMove = newToDoJobs[oldIndex - adjustment];
-        // jobToMove.apply = true;
-        // this.methods.putJob(jobToMove);
+        jobToMove.apply = true;
+        this.methods.putJob(jobToMove);
         newActiveJobs.splice(newIndex, 0, jobToMove);
         newToDoJobs.splice(oldIndex - adjustment, 1);
       }

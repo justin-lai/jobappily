@@ -4,20 +4,20 @@ export default class TodoListEntry extends React.Component {
   constructor(props) {
     super(props);
     this.data = this.props;
-    this.companyName = JSON.stringify(this.data["data"]["company"]).slice(1,-1);
-    this.description = JSON.stringify(this.data["data"]["description"]).slice(1,-1);
-    this.interviewer = JSON.stringify(this.data["data"]["interviewers"]).slice(1,-1);
-    // console.log('ths is interviewer', this.interviewer);
+    this.companyName = this.data["data"]["company"];
+    this.description = this.data["data"]["description"];
+    this.interviewer = this.data["data"]["interviewers"];
+    this.startTime = this.data["data"]["start"].slice(11, 16);
+    this.endTime = this.data["data"]["end"].slice(11, 16);
   }
 
   render() {
     return (
       <div>
         <li>
-          <a className="menu-box-tab" href="#">
-            <span className="icon scnd-font-color"></span>
-              {this.description} {"w/"} {this.interviewer} {"("}{this.companyName} {")"}
-          </a>
+          <span className="icon scnd-font-color"></span>
+            <h5 className="time">{this.startTime}{"-"}{this.endTime}</h5>
+            <h6 className="time end-time">{this.description} {"("}{this.companyName}{")"}</h6>
         </li>
       </div>
     );

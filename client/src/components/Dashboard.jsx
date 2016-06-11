@@ -17,11 +17,8 @@ export default class Dashboard extends React.Component {
     this.closeModalAdd = this.closeModalAdd.bind(this);
     this.activeApplications = [];
     this.toDoApplications = [];
-    // this.openJobSearchForm = this.openJobSearchForm(this);
-    // this.closeJobSearchForm = this.closeJobSearchForm(this);
     this.state = {
      open: false
-     // formOpen: false
     };
 
   }
@@ -63,7 +60,6 @@ export default class Dashboard extends React.Component {
   }
 
   categorizeJobs() {
-    // console.log(this.jobList)
     this.activeApplications = this.jobList.filter( job => {
       return job.apply;
     });
@@ -74,13 +70,6 @@ export default class Dashboard extends React.Component {
     this.render();
   }
 
-  // openJobSearchForm () {
-  //   this.setState({formOpen: true});
-  // }
-
-  // closeJobSearchForm () {
-  //   this.setState({formOpen: false});
-  // }
 
   render() {
     var jobs = this.jobList;
@@ -88,10 +77,6 @@ export default class Dashboard extends React.Component {
 
     return (
       <div className="dashboard">
-        <div className="move-buttons">
-          <Link to='/search' ><button className="top-btn">Search For Jobs</button></Link>
-          <Link to='/calendar' ><button className="top-btn">Calendar</button></Link>
-        </div>
 
       {/*------------Add New Position Modal-----------------*/}
         <Modal isOpen={this.state.open} onRequestClose={this.closeModalAdd}>
@@ -118,6 +103,10 @@ export default class Dashboard extends React.Component {
 
         <div className="container">
           <div className="row">
+            <div className="move-buttons">
+              <Link to='/search' ><button className="top-btn first">Search For Jobs</button></Link>
+              <Link to='/calendar' ><button className="top-btn">Calendar</button></Link>
+            </div>
 
             {/*------------Active Applications-----------------*/}
             <div className="col-xs-12 col-md-8 left-container container">
