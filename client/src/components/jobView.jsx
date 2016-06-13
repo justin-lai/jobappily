@@ -367,14 +367,14 @@ class JobView extends React.Component {
                 let emo = event.emotion || 'wtf';
                 return (
                   <div className="event col-xs-11 vcenter" key={idx}>
-                    <div className="event-icon col-xs-1"><img src={this.icons.person}/></div>
-                    <div className="col-xs-9"><h4>{new Date(event.start).toString()}</h4></div>
+                    <div className="event-icn col-xs-1"><img src={this.icons.person}/></div>
+                    <div className="col-xs-91"><h4>{new Date(event.start).toString()}</h4></div>
                     <div className="col-xs-1">
                       <button className="edit" onClick={() => { this.eventId = JSON.stringify(event.id); this.updateEvent(); this.openModal()}}>
                         <img className="editimg" src={this.icons.edit}/>
                       </button>
 
-                      <button className="edit" onClick={this.deleteEvent.bind(this, event)}>
+                      <button className="delete" onClick={this.deleteEvent.bind(this, event)}>
                         <img className="editimg" src={this.icons.delete}/>
                       </button>
                     </div>

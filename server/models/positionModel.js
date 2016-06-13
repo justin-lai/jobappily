@@ -19,12 +19,12 @@ module.exports = {
     }
   },
   post: (newPosition, cb) => {
-    console.log('position?', newPosition);
     db.Position.create(newPosition)
       .then((pos) => cb(null, pos))
       .catch(cb);
   },
   put: (positionChanges, cb) => {
+    console.log('EDITS: ', positionChanges);
     db.Position.findOne({ where: { id: positionChanges.id } })
       .then(position => position.update(positionChanges))
       .then((pos) => cb(null, pos))

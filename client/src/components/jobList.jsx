@@ -23,7 +23,6 @@ const SortableItem = SortableElement(({job, index, goToJobView}) => {
 });
 
 const SortableList = SortableContainer(({activeJobs, toDoJobs, goToJobView}) => {
-  console.log('!!!!!!!!!CHANGED')
   // console.log('!!!!!', activeJobs.map(job => job.company));
   let adjustment = activeJobs.length;
   return (
@@ -44,48 +43,12 @@ const SortableList = SortableContainer(({activeJobs, toDoJobs, goToJobView}) => 
           toDoJobs.map( (job, index) => {
             return (<SortableItem key={`job-${index+adjustment}`} index={index+adjustment} job={job} goToJobView={goToJobView}/>) 
             // return <JobListEntry key={`job-${index}`} job={job} index={index} />
+
           })
         }
       </ul>
     </div>
   )
-  // return (
-  //   <div>
-  //     <table className="jobPosting activeApps">
-  //       <thead className="days-week">
-  //           <tr>
-  //               <th>Company</th>
-  //               <th>Job Posting</th>
-  //           </tr>
-  //       </thead>
-  //       <tbody>
-  //         {
-  //           activeJobs.map( (job, index) => {
-  //             return (<SortableItem key={`job-${index}`} index={index} job={job} />)
-  //             // return <JobListEntry key={`job-${index}`} job={job} index={index} />
-  //           })
-  //         }
-  //       </tbody>
-  //     </table>
-
-  //     <table className="jobPosting toDoApps">
-  //       <thead className="days-week">
-  //           <tr>
-  //               <th>Company</th>
-  //               <th>Job Posting</th>
-  //           </tr>
-  //       </thead>
-  //       <tbody>
-  //         {
-  //           toDoJobs.map( (job, index) => {
-  //             return (<SortableItem key={`job-${index+adjustment}`} index={index+adjustment} job={job}  />)
-  //             // return <JobListEntry key={`job-${index}`} job={job} index={index} />
-  //           })
-  //         }
-  //       </tbody>
-  //     </table>
-  //   </div>
-  // );
 });
 
 
@@ -112,15 +75,11 @@ export default class JobList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('props received', nextProps)
     this.setState({
       activeJobs: nextProps.activeJobs,
       toDoJobs: nextProps.toDoJobs
     })
-  }
-
-  onSortStart({node, index}) {
-    console.log('NODE: ', node);
-    node = <tr><td>TEST</td></tr>
   }
 
   onSortEnd({oldIndex, newIndex}) {
@@ -137,10 +96,13 @@ export default class JobList extends React.Component {
       //if moving activeJob to toDoJob
       } else {
         let jobToMove = newActiveJobs[oldIndex];
-        jobToMove.apply = false;
-        this.methods.putJob(jobToMove);
+
         newToDoJobs.splice(newIndex - adjustment, 0, jobToMove)
         newActiveJobs.splice(oldIndex, 1);
+
+        //update job in database
+        jobToMove.apply = false;
+        this.methods.putJob(jobToMove);
       }
 
     //if position grabbed is a to-do job
@@ -151,12 +113,16 @@ export default class JobList extends React.Component {
       //if moving toDoJob to activeJob
       } else {
         let jobToMove = newToDoJobs[oldIndex - adjustment];
-        jobToMove.apply = true;
-        this.methods.putJob(jobToMove);
+        
         newActiveJobs.splice(newIndex, 0, jobToMove);
         newToDoJobs.splice(oldIndex - adjustment, 1);
+
+        //update job in database
+        jobToMove.apply = true;
+        this.methods.putJob(jobToMove);
       }
     }
+    
     this.setState({
       activeJobs: newActiveJobs,
       toDoJobs: newToDoJobs
@@ -171,12 +137,17 @@ export default class JobList extends React.Component {
     browserHistory.push(`/jobView?id=${job.id}`);
   }
 
+  goToJobView(job) {
+    console.log('clicked!');
+    browserHistory.push(`/jobView?id=${job.id}`);
+  }
+
   render() {
+    console.log(this.state.activeJobs);
     return (
       <SortableList toDoJobs={this.state.toDoJobs}
                     activeJobs={this.state.activeJobs}
                     goToJobView={this.goToJobView.bind(this)}
-                    // onSortStart={this.onSortStart.bind(this)}
                     onSortEnd={this.onSortEnd.bind(this)}
                     // transitionDuration={0}
                     useDragHandle={true}

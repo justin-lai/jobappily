@@ -39,6 +39,6 @@ export const JobListEntry = SortableElement(({job, index}) => {
 //   }
 
 //   render() {
-//     return (<SortableItem key={`job-${this.index}`} index={this.index} job={this.job} />)
+//     return (<SortableItem key={`job-${this.index}`} index={this.index} job={this.job} />) 
 //   }
 // }
