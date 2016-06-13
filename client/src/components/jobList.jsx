@@ -113,7 +113,7 @@ export default class JobList extends React.Component {
       //if moving toDoJob to activeJob
       } else {
         let jobToMove = newToDoJobs[oldIndex - adjustment];
-        
+
         newActiveJobs.splice(newIndex, 0, jobToMove);
         newToDoJobs.splice(oldIndex - adjustment, 1);
 
