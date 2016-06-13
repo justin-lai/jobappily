@@ -96,6 +96,7 @@ export default class JobList extends React.Component {
       //if moving activeJob to toDoJob
       } else {
         let jobToMove = newActiveJobs[oldIndex];
+
         newToDoJobs.splice(newIndex - adjustment, 0, jobToMove)
         newActiveJobs.splice(oldIndex, 1);
 
@@ -112,6 +113,7 @@ export default class JobList extends React.Component {
       //if moving toDoJob to activeJob
       } else {
         let jobToMove = newToDoJobs[oldIndex - adjustment];
+        
         newActiveJobs.splice(newIndex, 0, jobToMove);
         newToDoJobs.splice(oldIndex - adjustment, 1);
 
